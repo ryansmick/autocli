@@ -1,0 +1,11 @@
+name: autocli
+options:
+  - name: yaml-file
+    short-name: y
+    argument:
+      type: string
+arguments:
+  - name: language
+    type: string
+    values:
+      - python
