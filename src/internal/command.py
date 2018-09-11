@@ -1,4 +1,5 @@
 from internal.optional_argument import OptionalArgument
+from internal.required_argument import RequiredArgument
 
 # Repesents a CLI command or subcommand to the code generator internally
 class Command(object):
@@ -21,6 +22,8 @@ class Command(object):
         except KeyError as e:
             print("Error parsing optional argument number {} for command \"{}\": {}".format(index + 1, command_dict['name'], str(e)))
             return None
+
+        arguments = tuple({RequiredArgument(x) for x in command_dict.get('arguments', [])})
 
         return Command(
             name=command_dict['name'],
