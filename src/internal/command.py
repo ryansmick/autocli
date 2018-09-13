@@ -25,7 +25,7 @@ class Command(object):
 
         try:
             index = 0
-            arguments=tuple({OptionalArgument.build(x) for index, x in enumerate(command_dict.get('arguments', []))})
+            arguments=tuple({RequiredArgument.build(x) for index, x in enumerate(command_dict.get('arguments', []))})
         except KeyError as e:
             print("Error parsing required argument number {} for command \"{}\": {}".format(index + 1, command_dict['name'], str(e)))
 
