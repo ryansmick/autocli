@@ -9,10 +9,10 @@ class RequiredArgument(object):
     # Raises KeyError if the argument's name isn't present
     @classmethod
     def build(cls, argument_data):
-        argument = Argument.build(argument_data.get('argument', None))
+        if not argument_data or not 'name' in argument_data:
+            raise KeyError("All optional arguments must include the 'name' key")
 
-        if not argument.name:
-            argument.name = argument_data['name']
+        argument = Argument.build(argument_data)
 
         return RequiredArgument(
             argument=argument)
