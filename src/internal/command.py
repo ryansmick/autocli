@@ -13,7 +13,7 @@ class Command(object):
     # Returns None if it receives an error parsing an OptionalArgument
     @classmethod
     def build(cls, command_dict):
-        if not command_dict or not 'name' in command_dict:
+        if not command_dict or 'name' not in command_dict:
             raise KeyError("Command must contain a 'name' key")
 
         try:
