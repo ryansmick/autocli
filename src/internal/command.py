@@ -31,5 +31,5 @@ class Command(object):
 
         return Command(
             name=command_dict['name'],
-            options=options
+            options=options,
             arguments=arguments)
