@@ -16,3 +16,7 @@ class RequiredArgument(object):
 
         return RequiredArgument(
             argument=argument)
+
+    # Returns the decorator for this RequiredArgument
+    def get_decorator(self):
+        return '@click.argument(\'{}\')'.format(self.argument.name)

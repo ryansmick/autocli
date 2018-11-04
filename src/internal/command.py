@@ -33,3 +33,31 @@ class Command(object):
             name=command_dict['name'],
             options=options,
             arguments=arguments)
+
+    # Returns a list of the decorators required for this Command object
+    def get_decorators(self):
+        decorators = ["@click.command()"]
+        for arg in self.arguments:
+            decorators.append(arg.get_decorator())
+        for option in self.options:
+            decorators.append(option.get_decorator())
+        return decorators
+
+    # Returns the function prototype for this Command object
+    def get_prototype(self):
+        input_args = []
+        for arg in self.arguments:
+            input_args.append(arg.argument.name.replace('-', '_'))
+        for option in self.options:
+            input_args.append(option.name.replace('-', '_'))
+        return 'main({})'.format(', '.join(input_args))
+
+    # Write the Command object to a file referenced by File object f
+    def write(self, f):
+        f.write(
+            '\n'.join(self.get_decorators()) + '\n' +
+            'def {}:'.format(self.get_prototype()) + '\n' +
+            '\tpass\n\n' +
+            'if __name__ == \'__main__\':\n' +
+            '\tmain()\n'
+        )

@@ -23,3 +23,7 @@ class OptionalArgument(object):
             name=argument_data['name'],
             short_name=argument_data.get('short-name', None),
             argument=argument)
+
+    # Returns the decorator for this OptionalArgument
+    def get_decorator(self):
+        return '@click.option(\'--{}\', \'-{}\')'.format(self.name, self.short_name)
